@@ -38,4 +38,11 @@ public class Account {
 		this.balance = this.balance - amount;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Account [iban=" + iban + ", balance=" + balance + "]";
+	}
+	
+	
 }
