@@ -1,0 +1,45 @@
+# Java byte kodları
+*.class
+*.metadata
+.metadata
+# Derlenmiş dosyalar
+bin/
+target/
+
+# IntelliJ IDEA proje dosyaları
+.idea/
+
+# Eclipse proje dosyaları
+.classpath
+.project
+.settings/
+
+# NetBeans proje dosyaları
+nbproject/
+build/
+
+# Maven yapısına özgü dosyalar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# Gradle yapısına özgü dosyalar
+gradle/
+build/
+
+# VSCode yapılandırma dosyaları
+.vscode/
+
+# Mac OS spesifik dosyalar
+.DS_Store
+
+# Windows spesifik dosyalar
+Thumbs.db
+Desktop.ini
