@@ -55,10 +55,18 @@ public class Emplooyee {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+	
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
 	@Override
 	public String toString() {
 		return "Emplooyee [identity=" + identity + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", birthYear=" + birthYear + ", gender=" + gender + ", department=" + department + "]";
+				+ ", birthYear=" + birthYear + ", salary=" + salary + ", gender=" + gender + ", department="
+				+ department + "]";
 	}
 	
 	
