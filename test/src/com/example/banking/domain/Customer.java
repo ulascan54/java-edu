@@ -93,7 +93,7 @@ public class Customer extends Object {// Class -> attribute, ii. behavior -> met
 
 	}
 
-	@Override
+	@Override 
 	public String toString() {
 		return "Customer [identity=" + identity + ", fullname=" + fullname + ", birthYear=" + birthYear + ", email="
 				+ email + ", sms=" + sms + "]";
