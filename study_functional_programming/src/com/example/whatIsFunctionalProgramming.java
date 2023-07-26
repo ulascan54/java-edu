@@ -30,6 +30,8 @@ public class whatIsFunctionalProgramming {
 		A a= new A();
 		Fun z7 = a::run;
 		// Method Reference -> Lambda Expression
+		// Object Oriented Programming -> Class
+		// Functional Programming -> Functional Interface
 	}
 }
 class A{
