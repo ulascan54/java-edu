@@ -30,10 +30,14 @@ public class BankingApp {
 		Consumer<Account> printAccount = account -> System.out.println(account);
 		// opt + cmd + l extract to local variable
 		jack.getAccount("tr2").ifPresent(withdraw1k.andThen(printAccount));
+		//old way
 		Optional<Account>acc = jack.getAccount("tr2");
 		if(acc.isPresent()) {
 			acc.get().withdraw(1_000);
 			System.out.println(acc.get());
 		}
+	
+		System.out.println("Total balance:" +jack.getBalance());
+		System.out.println("Total balance:" +jack.getBalance8());
 	}
 }
