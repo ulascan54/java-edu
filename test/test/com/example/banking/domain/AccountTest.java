@@ -20,7 +20,7 @@ class AccountTest {
 		assertEquals(iban, acc.getIban());
 		assertEquals(balance, acc.getBalance());
 		// 4. tear-down
-		
+
 	}
 
 }
