@@ -1,6 +1,10 @@
 package com.example;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import com.example.entity.Department;
 import com.example.entity.Emplooyee;
@@ -37,11 +41,39 @@ public class Exercise1 {
 		// ii terminal methods: reduce, sum ,min , max ,findFirst, findAny, count,....
 		// Lazy Evaluation : terminal method triggers processing
 
-		long numberOfITMembers = employees.stream().filter(employee -> employee.getDepartment() == Department.IT).count();
-		System.out.println("number of IT members :" + numberOfITMembers);
-		
-		long numberOfITMembers2 = employees.stream().map(Emplooyee::getDepartment).filter(Department.IT::equals).count();
-		System.out.println("number of IT members :" + numberOfITMembers2);
+		long numberOfITMembers = employees.stream().filter(employee -> employee.getDepartment() == Department.IT)
+				.count();
+		System.out.println("1 number of IT members :" + numberOfITMembers);
+
+		long numberOfITMembers2 = employees.stream().map(Emplooyee::getDepartment).filter(Department.IT::equals)
+				.count();// .filter(department -> Department.IT.equals(department))
+		System.out.println("2 number of IT members :" + numberOfITMembers2);
+
+		long numberOfITMembers3 = employees.stream().map(Emplooyee::getDepartment).filter(Department.IT::equals)
+				.map(department -> 1).reduce(0, Integer::sum);
+		System.out.println("3 number of IT members :" + numberOfITMembers3);
+
+		// department.it -> {ben,jesse}
+		// department.sales ->{sun}
+		// department.finance ->{kate}
+		// department.marketting ->{jin}
+		// department.hr -> {jack}
+		Map<Department, List<Emplooyee>> departmentMap = employees.stream()
+				.collect(Collectors.groupingBy(Emplooyee::getDepartment));
+
+		Consumer<Entry<Department, List<Emplooyee>>> printEntry = entry -> System.out
+				.println(entry.getKey() + ": " + entry.getValue());
+		departmentMap.entrySet().forEach(printEntry);
+
+		Map<Department, Long> numberOfMemberEachDepartment = employees.stream()
+				.collect(Collectors.groupingBy(Emplooyee::getDepartment, Collectors.counting()));
+
+		System.out.println(numberOfMemberEachDepartment);
+
+		Consumer<Entry<Department,Long>> printEntry2 = entry -> System.out
+				.println(entry.getKey() + ": " + entry.getValue());
+		numberOfMemberEachDepartment.entrySet().forEach(printEntry2);
+
 	}
 
 }
