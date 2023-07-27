@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,7 +39,7 @@ public class Exercise1 {
 		// Stream API methods:
 		// i intermediary methods: ara methodlar , filter, map, distinct, limit, sorted,
 		// boxed, ...
-		// ii terminal methods: reduce, sum ,min , max ,findFirst, findAny, count,....
+		// ii terminal methods: reduce, sum ,min , max ,findFirst, findAny, count, foreach,collect....
 		// Lazy Evaluation : terminal method triggers processing
 
 		long numberOfITMembers = employees.stream().filter(employee -> employee.getDepartment() == Department.IT)
@@ -73,6 +74,12 @@ public class Exercise1 {
 		Consumer<Entry<Department,Long>> printEntry2 = entry -> System.out
 				.println(entry.getKey() + ": " + entry.getValue());
 		numberOfMemberEachDepartment.entrySet().forEach(printEntry2);
+		
+		employees.stream().sorted(Comparator.comparing(Emplooyee::getSalary).reversed()).map(Emplooyee::getSalary).forEach(System.out::println);
+		
+		employees.stream().max(Comparator.comparing(Emplooyee::getSalary)).ifPresent(System.out::println);
+		
+		employees.stream().sorted(Comparator.comparing(Emplooyee::getSalary).reversed()).map(Emplooyee::getSalary).findFirst().ifPresent(System.out::println);
 
 	}
 
