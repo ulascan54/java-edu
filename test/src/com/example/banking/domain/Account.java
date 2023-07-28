@@ -4,7 +4,7 @@ package com.example.banking.domain;
 public class Account {
 	private final String iban;
 	// default permission , package private
-	protected double balance; // information hiding principle 
+	protected double balance; // information hiding principle
 
 	public Account(String iban, double balance) {
 		this.iban = iban;
@@ -21,29 +21,29 @@ public class Account {
 	// sadece getter yazdık çünkü değiştirmeleri setterdan yapmacağız bussines
 	// methodları üzerinden yapıcaz
 
-	public boolean deposit(double amount) {
+	public final double deposit(double amount) {
 		// validation
 		if (amount <= 0.0)
-			return false;
+			throw new IllegalArgumentException("amount cannot be negative");
+		//business logic
 		this.balance = this.balance + amount;
-		return true;
+		return this.balance;
 	}
 
-	public boolean withdraw(double amount) {
+	public double withdraw(double amount) {
 		// validation
 		if (amount <= 0.0)
-			return false;
+			throw new IllegalArgumentException("amount cannot be negative");
 		// business rule
 		if (amount > this.balance)
-			return false;
+			throw new 	InsufficientBalanceException("amount cannot be negative",amount-this.balance);// Business Exception
 		this.balance = this.balance - amount;
-		return true;
+		return this.balance;
 	}
 
 	@Override
 	public String toString() {
 		return "Account [iban=" + iban + ", balance=" + balance + "]";
 	}
-	
-	
+
 }
