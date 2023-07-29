@@ -29,8 +29,11 @@ public class Account {
 		this.balance = this.balance + amount;
 		return this.balance;
 	}
+	//There are two types of exceptions in Java
+	//1. Unchecked Exceptions: Runtime Exception -> extends Runtime Exception
+	//2. Checked Exceptions: Business Exception -> extends Exception
 
-	public double withdraw(double amount) {
+	public double withdraw(double amount) throws InsufficientBalanceException {
 		// validation
 		if (amount <= 0.0)
 			throw new IllegalArgumentException("amount cannot be negative");

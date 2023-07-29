@@ -9,4 +9,8 @@ public class InsufficientBalanceException extends Exception {
 		this.deficit = deficit;
 	}
 
+	public double getDeficit() {
+		return deficit;
+	}
+
 }

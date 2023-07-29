@@ -19,16 +19,16 @@ public class CheckingAccount extends Account {
 	}
 
 	@Override
-	public boolean withdraw(double amount) {
+	public double withdraw(double amount) throws InsufficientBalanceException {
 		// validation
 		if (amount <= 0)
-			return false;
+			throw new IllegalArgumentException("amount cannot be negative");
 		// bussiness rule
 		if (amount > (balance + overdraftAmount))
-			return false;
+			throw new InsufficientBalanceException("amount cannot be negative", amount - balance - overdraftAmount);
 		// bussiness logic
 		balance = balance - amount;
-		return true;
+		return balance;
 
 	}
 

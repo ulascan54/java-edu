@@ -26,40 +26,40 @@ class AccountTest {
 
 	@Test
 	@DisplayName("with draw negative amount should return false")
-	void withdrawNegativeAmountShouldReturnFalse() {
+	void withdrawNegativeAmountShouldReturnFalse(double amount) {
 		Account account = new Account("tr1", 10_000);
-		assertFalse(account.withdraw(-1.));
+		assertThrows(IllegalArgumentException.class, () -> account.withdraw(amount));
 		assertEquals(10_000, account.getBalance());
 	}
 	@Test
 	@DisplayName("withdraw amount greater than balance should return false")
-	void withdrawOverBalanceShouldReturnFalse() {
+	void withdrawOverBalanceShouldReturnFalse(double amount) {
 		Account account = new Account("tr1", 10_000);
-		assertFalse(account.withdraw(10_000.1));
+		assertThrows(InsufficientBalanceException.class, () -> account.withdraw(amount));
 		assertEquals(10_000, account.getBalance());
 	}
 	
 	@Test
 	@DisplayName("withdraw all balance should return true")
-	void withdrawAllBalanceShouldReturnTrue() {
-		Account account = new Account("tr1", 10_000);
-		assertTrue(account.withdraw(10_000));
+	void withdrawAllBalanceShouldReturnTrue(double balance) throws Throwable {
+		Account account = new Account("tr1", balance);
+		account.withdraw(balance);
 		assertEquals(0., account.getBalance());
 	}
 	
 	@Test
 	@DisplayName("deposit with negative amount should return false")
-	void depositNegativeAmountShouldReturnFalse() {
+	void depositNegativeAmountShouldReturnFalse(double amount) {
 		Account account = new Account("tr1", 10_000);
-		assertFalse(account.deposit(-1));
+		assertThrows(IllegalArgumentException.class, () -> account.withdraw(amount));
 		assertEquals(10_000, account.getBalance());
 	}
 	
 	@Test
 	@DisplayName("deposit positive amount should return true")
-	void depositPositiveAmountShouldReturnTrue() {
+	void depositPositiveAmountShouldReturnTrue() throws Throwable{
 		Account account = new Account("tr1", 10_000);
-		assertTrue(account.deposit(1));
+		account.deposit(1);
 		assertEquals(10_001, account.getBalance());
 	}
 	
