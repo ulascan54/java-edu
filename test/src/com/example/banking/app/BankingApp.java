@@ -5,10 +5,11 @@ import java.util.function.Consumer;
 
 import com.example.banking.domain.Account;
 import com.example.banking.domain.Customer;
+import com.example.banking.domain.InsufficientBalanceException;
 
 public class BankingApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InsufficientBalanceException {
 		Customer jack; // cmd opt o
 		jack = new Customer("11111111110", "jack bauer", 1956, "jack@example.com", "555 555");
 		System.out.println(jack.getFullname());
@@ -24,9 +25,9 @@ public class BankingApp {
 		System.out.println("Number of account is " + jack.getNumberOfAccounts());
 		System.out.println(jack.getAccount(1));
 		System.out.println(jack.getAccount("tr3"));
-		jack.getAccount("tr4").ifPresent(account -> account.withdraw(1_000));
+		jack.getAccount("tr4").ifPresent(account -> withdraw(account,1_000));
 		// Lambda Expression   
-		Consumer<Account> withdraw1k = account -> account.withdraw(1_000);
+		Consumer<Account> withdraw1k = account -> withdraw(account,1_000);
 		Consumer<Account> printAccount = account -> System.out.println(account);
 		// opt + cmd + l extract to local variable
 		jack.getAccount("tr2").ifPresent(withdraw1k.andThen(printAccount));
@@ -39,5 +40,13 @@ public class BankingApp {
 	
 		System.out.println("Total balance:" +jack.getBalance());
 		System.out.println("Total balance:" +jack.getBalance8());
+	}
+	
+	public static void withdraw(Account account, double amount) {
+		try {
+			account.withdraw(amount);
+		} catch (InsufficientBalanceException e) {
+			e.printStackTrace();
+		}
 	}
 }
