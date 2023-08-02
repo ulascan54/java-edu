@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class ProfilingAspect {
-    @Around("execution(* com.example..*(..))")
-    public Object profile(ProceedingJoinPoint pjp) throws Throwable {
+    @Around("(@annotation(profiled) || @target(profiled)) && execution(* com.example..*(..))")
+    public Object profile(ProceedingJoinPoint pjp, Profiled profiled) throws Throwable {
         var start = System.nanoTime();
         var result = pjp.proceed();
         var stop = System.nanoTime();

@@ -10,8 +10,8 @@ import java.util.Date;
 @Aspect
 @Component
 public class AuditingAspect {
-    @Around("execution(* com.example..*(..))")
-    public Object profile(ProceedingJoinPoint pjp ) throws  Throwable{
+    @Around("(@annotation(audited) || @target(audited)) && execution(* com.example..*(..))")
+    public Object profile(ProceedingJoinPoint pjp, Audited audited ) throws  Throwable{
         System.out.println("%s is called at %s".formatted(pjp.getSignature().getName(),new Date()));
         var result = pjp.proceed();
         System.out.println("%s is called at %s".formatted(pjp.getSignature().getName(),result));
