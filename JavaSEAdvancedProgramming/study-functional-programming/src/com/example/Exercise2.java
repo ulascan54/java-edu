@@ -18,6 +18,10 @@ public class Exercise2 {
                 student -> student.grades().stream().filter(LetterGrade.AA::equals).count();
         Function<Student,Double> extractAverageGrade=
                 student -> student.grades().stream().mapToInt(LetterGrade::getValue).average().getAsDouble();
+
+        //max, ifPresent, mapToInt : higher-order function
+        //extractNumberOfAAs,extractAverageGrade:pure function -> immutability
+
         students.stream()
                 .max(Comparator.comparing(extractNumberOfAAs).thenComparing(extractAverageGrade))
                 .ifPresent(System.out::println);
