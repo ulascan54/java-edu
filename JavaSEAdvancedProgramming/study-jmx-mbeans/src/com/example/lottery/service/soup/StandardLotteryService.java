@@ -5,6 +5,7 @@ import com.example.lottery.jmx.WebServiceQualitySamplerMXBean;
 import com.example.lottery.service.LotteryService;
 
 import javax.jws.WebService;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.ThreadLocalRandom;
@@ -18,20 +19,32 @@ implements LotteryService, WebServiceQualitySamplerMXBean {
     private long totalResponseTime;
     @Override
     public List<Integer> draw(int max, int size) {
-        return ThreadLocalRandom.current()
-                .ints(1,60)
+        long start = System.nanoTime();
+        List<Integer> numbers = ThreadLocalRandom.current()
+                .ints(1, 60)
                 .distinct()
                 .limit(6).sorted().boxed()
                 .collect(Collectors.toList());
+        long stop = System.nanoTime();
+        totalResponseTime += (stop-start);
+        counter++;
+        double averageResponsTime = totalResponseTime / counter;
+        if (averageResponsTime > 200_000.){
+            setChanged();
+            notifyObservers(getQualityMetric());
+        }
+        return numbers;
     }
 
     @Override
     public void reset() {
+        counter=0;
+        totalResponseTime=0;
 
     }
 
     @Override
     public QualityMetric getQualityMetric() {
-        return null;
+        return new QualityMetric(new Date(),counter,(double) totalResponseTime/counter);
     }
 }
