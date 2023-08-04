@@ -15,6 +15,4 @@ public class LotteryAppServer {
         registry.rebind("lotteryService",lotteryService);
         System.err.println("Lottery RMI Service is running.");
     }
-
-
 }
