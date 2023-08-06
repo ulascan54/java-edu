@@ -7,7 +7,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 public class MarketApiWebsocketClient {
-    private static final String URL = "wss://testnet.binance.vision/ws-api/v3";
+    private static final String URL = "wss://stream.binance.com:9943/ws/btcusdt@trade";
 
     public static void main(String[] args) throws InterruptedException {
         var listener = new MarketWebSocketListener();
