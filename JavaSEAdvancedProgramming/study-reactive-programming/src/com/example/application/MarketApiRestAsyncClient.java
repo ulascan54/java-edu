@@ -19,8 +19,6 @@ public class MarketApiRestAsyncClient {
         var start = System.currentTimeMillis();
         var markets = List.of("BTCUSDT", "ETHBTC", "LTCBTC", "BNBBTC", "NEOBTC", "QTUMETH", "EOSETH", "SNTETH", "BNTETH", "BCCBTC");
         markets.forEach(symbol -> {
-
-
             var request = HttpRequest.newBuilder()
                     .uri(URI.create(URL.formatted(symbol)))
                     .header("Accept", "application/json")
